@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <property name="LOGS_DIR" value="./logs" />
+
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %white(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1}): %msg%n%throwable
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="RollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOGS_DIR}/elearning.log</file>
+
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%d %p %C{1} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOGS_DIR}/archived/centrally-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>5MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <springProfile name="local | dev">
+        <logger name="org.hibernate.SQL" additivity="false">
+            <level value="INFO" />
+            <appender-ref ref="Console" />
+            <appender-ref ref="RollingFile" />
+        </logger>
+
+        <logger name="org.hibernate.type" additivity="false">
+            <level value="INFO" />
+            <appender-ref ref="Console" />
+            <appender-ref ref="RollingFile" />
+        </logger>
+
+        <logger name="org.springframework.web" additivity="false">
+            <level value="INFO" />
+            <appender-ref ref="Console" />
+            <appender-ref ref="RollingFile" />
+        </logger>
+    </springProfile>
+
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="RollingFile" />
+    </root>
+
+</configuration>

@@ -1,0 +1,97 @@
+bTable "ep_users" {
+  "user_id" int [pk, increment]
+  "user_name" varchar(100) [not null]
+  "password" varchar(255) [not null]
+  "status" int [default: 1]
+  "ts" timestamp [not null]
+  "crt_at" datetime [not null]
+  "crt_by" varchar(25) [not null]
+  "upd_at" datetime [not null]
+  "upd_by" varchar(25) [not null]
+}
+
+Table "ep_courses" {
+  "course_id" int [pk, increment]
+  "course_title" varchar(255) [not null]
+  "course_desc" blob
+  "start_date" datetime
+  "end_date" datetime
+  "duration" varchar(25)
+  "status" int [default: 1]
+  "ts" timestamp [not null]
+  "crt_at" datetime [not null]
+  "crt_by" varchar(25) [not null]
+  "upd_at" datetime [not null]
+  "upd_by" varchar(25) [not null]
+}
+
+Table "ep_course_modules" {
+  "module_id" int [pk, increment]
+  "course_id" int [not null]
+  "module_title" varchar(255) [not null]
+  "module_desc" blob
+  "start_date" datetime
+  "end_date" datetime
+  "duration" varchar(25)
+  "status" int [default: 1]
+  "ts" timestamp [not null]
+  "crt_at" datetime [not null]
+  "crt_by" varchar(25) [not null]
+  "upd_at" datetime [not null]
+  "upd_by" varchar(25) [not null]
+}
+
+Ref: ep_courses.course_id < ep_course_modules.course_id
+
+Table "ep_students" {
+  "student_id" int [pk, increment]
+  "student_name" varchar(100) [not null]
+  "email_id" varchar(255) [not null]
+  "mobile_no" varchar(20) [not null]
+  "address" varchar(255)
+  "city" varchar(100)
+  "state" varchar(50)
+  "country" varchar(50)
+  "status" int [default: 1]
+  "ts" timestamp [not null]
+  "crt_at" datetime [not null]
+  "crt_by" varchar(25) [not null]
+  "upd_at" datetime [not null]
+  "upd_by" varchar(25) [not null]
+}
+
+Table "ep_student_courses" {
+  "student_id" int [pk]
+  "course_id" int [pk]
+  "enroll_date" datetime [not null]
+  "remarks" varchar(255)
+  "status" int [default: 1]
+  "ts" timestamp [not null]
+  "crt_at" datetime [not null]
+  "crt_by" varchar(25) [not null]
+  "upd_at" datetime [not null]
+  "upd_by" varchar(25) [not null]
+}
+
+Ref: ep_students.student_id < ep_student_courses.student_id
+Ref: ep_courses.course_id < ep_student_courses.course_id
+
+Table "ep_student_tests" {
+  "test_attempt_id" int [pk, increment]
+  "student_id" int [not null]
+  "course_id" int [not null]
+  "module_id" int
+  "test_id" int [not null]
+  "test_type" int [not null, default: 0]
+  "test_start_time" datetime
+  "test_end_time" datetime
+  "test_data" blob
+  "test_score" double [not null]
+  "remarks" varchar(255)
+  "status" int [default: 1]
+  "ts" timestamp [not null]
+  "crt_at" datetime [not null]
+  "crt_by" varchar(25) [not null]
+  "upd_at" datetime [not null]
+  "upd_by" varchar(25) [not null]
+}
