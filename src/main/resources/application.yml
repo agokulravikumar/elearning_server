@@ -29,7 +29,7 @@ spring:
             enabled: false
 
   flyway:
-    table: ce_schema_history
+    table: ep_schema_history
     locations: classpath:db/migration/dev
     out-of-order: true
 
