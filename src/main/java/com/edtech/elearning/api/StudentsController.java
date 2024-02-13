@@ -2,20 +2,18 @@ package com.edtech.elearning.api;
 
 import com.edtech.elearning.annotations.StandardResponse;
 import com.edtech.elearning.enums.TestType;
-import com.edtech.elearning.model.*;
+import com.edtech.elearning.model.Student;
+import com.edtech.elearning.model.StudentCourse;
+import com.edtech.elearning.model.StudentTest;
 import com.edtech.elearning.service.StudentService;
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.security.SecurityRequirements;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping(path = "/students")
