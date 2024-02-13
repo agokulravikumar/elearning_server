@@ -96,7 +96,7 @@ public class StudentService {
 
         StudentTestsEntity studentTestsEntity = modelConverter.map(studentTest, StudentTestsEntity.class);
         studentTestsEntity.setTestType(testType.getType());
-        studentTestsEntity.setTestScore(random.nextDouble());
+        studentTestsEntity.setTestScore((double) random.nextInt(35, 101));
 
         StudentTestsEntity savedStudentTest = studentTestsRepo.save(studentTestsEntity);
 
