@@ -21,13 +21,8 @@ public class StudentCoursesEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @Id
-    @Column(name = "student_id", nullable = false)
-    private Integer studentId;
-
-    @Id
-    @Column(name = "course_id", nullable = false)
-    private Integer courseId;
+    @EmbeddedId
+    private StudentCoursesEntityPk pk;
 
     @Column(name = "enroll_date", nullable = false)
     private LocalDateTime enrollDate;
