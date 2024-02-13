@@ -1,0 +1,23 @@
+spring:
+  datasource:
+    elearning:
+      hikari:
+        connection-test-query: SELECT 1 FROM DUAL
+        minimum-idle: 1
+        maximum-pool-size: 5
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      jdbc-url: jdbc:mysql://localhost/elearning_dev?serverTimezone=Asia/Kolkata&createDatabaseIfNotExist=true&useUnicode=true&characterEncoding=utf8
+      username: elearn
+      password: Elearn@2024
+      initialization-mode: always
+
+  flyway:
+    table: ep_schema_history
+    locations: classpath:db/migration/release
+    out-of-order: true
+
+springdoc:
+  api-docs:
+    enabled: false
+  swagger-ui:
+    enabled: false

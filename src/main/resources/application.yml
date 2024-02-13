@@ -40,6 +40,8 @@ spring:
 server:
   port: 6161
   forward-headers-strategy: framework
+  servlet:
+    context-path: /api
 
 management:
   endpoints:
@@ -53,3 +55,4 @@ springdoc:
     path: /api-docs
   swagger-ui:
     path: /api-docs.html
+  show-login-endpoint: true
