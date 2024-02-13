@@ -17,5 +17,14 @@ public class Constants {
     public static final String CURRENT_PAGE = "EP-Current-Page";
     public static final String NO_OF_ELEMENTS = "EP-No-of-Elements";
 
+    // General
+    public static final int ACTIVE = 1;
+    public static final int INACTIVE = 0;
+
+    // Symbols
+    public static final String COMMA = ",";
+
+    // Courses
+    public static final String STATUS = "status";
 
 }
