@@ -23,6 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Random;
 
@@ -74,7 +75,7 @@ public class StudentService {
 
         StudentCoursesEntity studentCoursesEntity = new StudentCoursesEntity();
         studentCoursesEntity.setPk(pk);
-        studentCoursesEntity.setEnrollDate(LocalDateTime.now());
+        studentCoursesEntity.setEnrollDate(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
         studentCoursesEntity.setStatus(Constants.ACTIVE);
 
         StudentCoursesEntity savedStudentCourse = studentCoursesRepo.save(studentCoursesEntity);
@@ -86,7 +87,7 @@ public class StudentService {
 
     @SneakyThrows
     public ResponseEntity<StudentTest> submitTests(StudentTest studentTest, TestType testType) {
-        if (!courseService.courseExistsById(studentTest.getStudentId())) {
+        if (!courseService.courseExistsById(studentTest.getCourseId())) {
             throw new ValidationException(MsgConstants.INVALID_COURSE_ID);
         } else if (!studentsRepo.existsById(studentTest.getStudentId())) {
             throw new ValidationException(MsgConstants.STUDENT_NOT_AVAILABLE);
